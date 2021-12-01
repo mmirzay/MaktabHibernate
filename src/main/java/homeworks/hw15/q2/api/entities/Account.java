@@ -15,8 +15,8 @@ public class Account {
 	private Customer customer;
 	private double balance;
 	@ManyToOne
-	@JoinColumn(name = "bank_name", nullable = false)
-	private Bank bank;
+	@JoinColumn(nullable = false)
+	private Branch branch;
 
 	public Account(long number, Customer customer) {
 		this.number = number;
