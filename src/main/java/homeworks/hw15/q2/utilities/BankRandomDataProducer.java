@@ -3,6 +3,7 @@ package homeworks.hw15.q2.utilities;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -29,7 +30,7 @@ public final class BankRandomDataProducer {
 	}
 
 	private void initBanksList() {
-		banks.add(new Bank("Tejart"));
+		banks.add(new Bank("Tejarat"));
 		banks.add(new Bank("Mellat"));
 		banks.add(new Bank("Sepah"));
 		banks.add(new Bank("Saderat"));
@@ -98,7 +99,7 @@ public final class BankRandomDataProducer {
 
 	private String initRandomCardNumber(String bankName) {
 		StringBuilder result = new StringBuilder();
-		int numberOfDigits = RandomGenerator.getRandomInt(0, 1) == 0 ? 16 : 12;
+		int numberOfDigits = RandomGenerator.getRandomInt(0, 1) == 0 ? 12 : 16;
 		String first4Digits = switch (bankName) {
 		case "Tejarat" -> "5859";
 		case "Mellat" -> "6104";
@@ -130,8 +131,16 @@ public final class BankRandomDataProducer {
 		return result;
 	}
 
-	public List<Integer> getAllAccountNumbers(Branch branch) {
-		return new ArrayList<>(accountNumbers.get(branch));
+	public Integer getValidAccountNumberForBranch(Branch branch) {
+		if (accountNumbers.get(branch).isEmpty())
+			throw new RuntimeException("No available account number");
+		Iterator<Integer> iterator = accountNumbers.get(branch).iterator();
+		Integer number = null;
+		if (iterator.hasNext()) {
+			number = iterator.next();
+			iterator.remove();
+		}
+		return number;
 	}
 
 	public String getCardNumber(Integer accountNumber) {

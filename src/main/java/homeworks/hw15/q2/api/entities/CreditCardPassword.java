@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+/**
+ * @author MoMi
+ *
+ */
 @Entity
 public class CreditCardPassword implements Serializable {
 
@@ -15,9 +19,51 @@ public class CreditCardPassword implements Serializable {
 	private CreditCard card;
 	private short firstPassword;
 	private Short secondPassword;
+	private short expirationYear;
+	private short expirationMonth;
+	private short cvv;
+	private boolean active;
+
+	public CreditCardPassword(CreditCard card, short firstPassword, short expirationYear, short expirationMonth,
+			short cvv) {
+		this.card = card;
+		this.firstPassword = firstPassword;
+		this.expirationYear = expirationYear;
+		this.expirationMonth = expirationMonth;
+		this.cvv = cvv;
+		this.setActive(true);
+	}
+
+	public CreditCardPassword() {
+
+	}
 
 	public short getFirstPassword() {
 		return firstPassword;
+	}
+
+	public CreditCard getCard() {
+		return card;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public short getExpirationYear() {
+		return expirationYear;
+	}
+
+	public short getExpirationMonth() {
+		return expirationMonth;
+	}
+
+	public short getCvv() {
+		return cvv;
 	}
 
 	public void setFirstPassword(short firstPassword) {
@@ -31,4 +77,17 @@ public class CreditCardPassword implements Serializable {
 	public void setSecondPassword(Short secondPassword) {
 		this.secondPassword = secondPassword;
 	}
+
+	@Override
+	public String toString() {
+		return "CreditCardPassword [card=" + card + ", firstPassword=" + firstPassword + ", secondPassword="
+				+ secondPassword + ", expirationYear=" + expirationYear + ", expirationMonth=" + expirationMonth
+				+ ", cvv=" + cvv + ", active=" + active + "]";
+	}
+
+	public String getInfo() {
+		return "Card Number: " + card.getNumber() + " CVV: " + cvv + " Year: " + expirationYear + " Month: "
+				+ expirationMonth;
+	}
+
 }

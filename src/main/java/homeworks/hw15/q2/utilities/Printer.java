@@ -25,6 +25,11 @@ public class Printer {
 		printWaitingMessage();
 	}
 
+	public static void printLineMessage(String msg) {
+		System.out.println();
+		System.out.println(">>> " + msg);
+	}
+
 	public static void printWaitingMessage() {
 		System.out.println("_____________ press Enter to continue...");
 		Input.getOptionalStringInputValue("");

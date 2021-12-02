@@ -6,11 +6,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.DiscriminatorFormula;
+
 @Entity
-public class Transaction {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorFormula(value = "Null")
+public abstract class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -23,8 +29,7 @@ public class Transaction {
 	private double amount;
 	private Date date;
 
-	public Transaction(int id, Account srcAccount, Account destAccount, double amount) {
-		this.id = id;
+	public Transaction(Account srcAccount, Account destAccount, double amount) {
 		this.srcAccount = srcAccount;
 		this.destAccount = destAccount;
 		this.amount = amount;
@@ -35,40 +40,20 @@ public class Transaction {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public Account getSrcAccount() {
 		return srcAccount;
-	}
-
-	public void setSrcAccount(Account srcAccount) {
-		this.srcAccount = srcAccount;
 	}
 
 	public Account getDestAccount() {
 		return destAccount;
 	}
 
-	public void setDestAccount(Account destAccount) {
-		this.destAccount = destAccount;
-	}
-
 	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
-
 	public Date getDate() {
 		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 }

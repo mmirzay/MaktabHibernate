@@ -6,6 +6,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * @author MoMi
+ *
+ */
 @Entity
 public class Employee {
 	@Id
@@ -42,6 +46,11 @@ public class Employee {
 
 	public Branch getBranch() {
 		return branch;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", managerID=" + manager.getId() + ", branch=" + branch + "]";
 	}
 
 }

@@ -2,7 +2,6 @@ package homeworks.hw15.q2.utilities;
 
 import java.util.Scanner;
 
-
 public class Input {
 	static Scanner input = new Scanner(System.in);
 
@@ -28,8 +27,15 @@ public class Input {
 				return Integer.parseInt(getStringInputValue(msg));
 			} catch (Exception e) {
 				Printer.printErrorMessage("Invalid input!");
-				if (msg.isEmpty())
-					System.out.print(">> ");
+			}
+	}
+
+	public static long getLongInputValue(String msg) {
+		while (true)
+			try {
+				return Long.parseLong(getStringInputValue(msg));
+			} catch (Exception e) {
+				Printer.printErrorMessage("Invalid input!");
 			}
 	}
 }
